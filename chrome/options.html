@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rename Downloads Option</title>
+
+	<link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="static/materialize/css/materialize.min.css" />
+	<link rel="stylesheet" href="static/codemirror/lib/codemirror.css" />
+	<link rel="stylesheet" href="static/codemirror/addon/lint/lint.css" />
+	
+	<script type="text/javascript" src="static/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="static/codemirror/lib/codemirror.js"></script>
+	<script type="text/javascript" src="static/codemirror/mode/javascript/javascript.js"></script>
+	<script type="text/javascript" src="static/jshint/jshint.js"></script>
+	<script type="text/javascript" src="static/codemirror/addon/lint/lint.js"></script>
+	<script type="text/javascript" src="static/codemirror/addon/lint/javascript-lint.js"></script>
+
+	<style>
+	
+	body {
+		font-size: 100%;
+	}
+	.icon-block {
+		padding: 0 15px;
+	}
+	.icon-block .material-icons {
+		font-size: inherit;
+	}
+	</style>
+</head>
+<body>
+   <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+	  <a id="logo-container" href="#" class="brand-logo">
+		Rename Downloads Option
+	  </a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">TODO: Settings</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+		<div class="row">
+		  <div class="col s3">
+			  <div class="collection">
+				<a href="#!" class="collection-item" id="rule-new-item">
+				  <div class="row">
+					<div class="input-field col s10">
+					  <input id="rule-new-name" type="text">
+					  <label class="active" for="rule-new-name">New rule</label>
+					</div>
+					<div class="input-field col s2">
+					  <i class="secondary-content material-icons" id="rule-new">add</i>
+					</div>
+				  </div>
+				</a>
+			  </div>
+		  </div>
+
+		  <div class="col s9">
+			<div class="row">
+			  <div class="col s10" id="rule-name" rule-id="-1">A name</div>
+			  <div class="col s1"><a href="#!" id="rule-save"><i class="material-icons">save</i></a></div>
+			  <div class="col s1"><a href="#!" id="rule-delete"><i class="material-icons">delete</i></a></div>
+			</div>
+			<div class="divider"></div>
+			<br>
+
+			<div class="section">
+			  <h6>Url starts with:</h6>
+			  <input id="rule-url" type="text">
+			</div>
+			
+			<div class="section">
+			  <h6>Code:</h6>
+			  <textarea id="rule-code">
+			  </textarea>
+			</div>
+		  </div>
+		</div>
+    </div>
+    <br><br>
+
+    <div class="section">
+    </div>
+  </div>
+
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Rename Downloads</h5>
+          <p class="grey-text text-lighten-4">When saving a file, you have the opportunity to change it's default name.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Open source on <a class="orange-text text-lighten-3" href="https://github.com/bluesky139/RenameDownloads">Github</a>
+      </div>
+    </div>
+  </footer>
+  
+  <script type="text/javascript" src="common.js"></script>
+  <script type="text/javascript" src="options.js"></script>
+
+</body>
+</html>

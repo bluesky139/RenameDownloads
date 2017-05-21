@@ -1,0 +1,33 @@
+{
+  "name": "Rename Downloads",
+  "description": "When saving a file, you have the opportunity to change it's default name.",
+  "version": "0.0.1",
+  
+  "content_scripts": [
+    {
+	  "matches": ["http://*/*", "https://*/*"],
+      "js": ["static/jquery-3.2.1.min.js", "common.js", "content_script.js"]
+    }
+  ],
+
+  "background" : { "scripts": ["common.js", "background.js"] },
+
+  "permissions": [
+    "downloads",
+    "storage",
+	"tabs",
+	"activeTab"
+  ],
+
+  "options_page": "options.html",
+  
+  "icons" : {
+    "16" : "icon_16.png",
+    "48" : "icon_48.png",
+    "128" : "icon_128.png"
+  },
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+  "manifest_version": 2
+}
