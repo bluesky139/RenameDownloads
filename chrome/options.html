@@ -35,10 +35,9 @@
 	  <a id="logo-container" href="#" class="brand-logo">
 		Rename Downloads Option
 	  </a>
-      <ul class="right hide-on-med-and-down">
+      <ul class="right">
         <li><a href="#">TODO: Settings</a></li>
       </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
   <div class="section no-pad-bot" id="index-banner">
@@ -66,7 +65,7 @@
 
 		  <div class="col s9">
 			<div class="row">
-			  <div class="col s10" id="rule-name" rule-id="-1">A name</div>
+			  <div class="col s10" id="rule-name" rule-id="-1"><h5></h5></div>
 			  <div class="col s1"><a href="#!" id="rule-save"><i class="material-icons">save</i></a></div>
 			  <div class="col s1"><a href="#!" id="rule-delete"><i class="material-icons">delete</i></a></div>
 			</div>
@@ -74,12 +73,48 @@
 			<br>
 
 			<div class="section">
-			  <h6>Url starts with:</h6>
+			  <h5>
+			    Urls:
+				<a href="#!" class="material-icons tooltipped" 
+					data-position="right" 
+					data-delay="50" 
+					data-html="true" 
+					data-tooltip="
+					<div class='left-align'>
+						Match the url starts with.<br>
+						The first one will be used if the url can be matched by multi rules.
+					</div>">
+					info_outline
+				</a>
+			  </h5>
 			  <input id="rule-url" type="text">
 			</div>
 			
 			<div class="section">
-			  <h6>Code:</h6>
+			  <h5>
+			    Code: 
+				<a href="#!" class="material-icons tooltipped" 
+					data-position="right" 
+					data-delay="50" 
+					data-html="true" 
+					data-tooltip="
+					<div class='left-align'>
+						Add js code to get filename from webpage.<br>
+						Code will be executed by eval(), remember to return filename at last sentence.<br>
+						<br>
+						Available variables:<br>
+						&nbsp;- clickedElement: The DOM element you just clicked.<br>
+						<br>
+						Available libraries:<br>
+						&nbsp;- jQuery (v3.2.1)<br>
+						<br>
+						Notice:<br>
+						&nbsp;- Due to the limitation of filename length, you'd better keep it in 200, or it will be cut by system.<br>
+						&nbsp;- Invalid characters <code class='teal blue-grey darken-2'><>:&quot;/\|?*</code> will be replaced to underscore.
+					</div>">
+					info_outline
+				</a>
+			  </h5>
 			  <textarea id="rule-code">
 			  </textarea>
 			</div>
@@ -97,7 +132,10 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">Rename Downloads</h5>
-          <p class="grey-text text-lighten-4">When saving a file, you have the opportunity to change it's default name.</p>
+          <p class="grey-text text-lighten-4">
+		    When saving a file, you have the opportunity to change it's default name.<br>
+			Strictly, this extension is not for everyone (you need to know html and js), but you can directly use rules from others' shared.
+		  </p>
         </div>
       </div>
     </div>

@@ -1,15 +1,10 @@
 var codeEditor;
 var rules = [];
+
 $(document).ready(function() {
 	loadRules(function(rules) {
 		init(rules);
 	});
-	
-	/* $('.rule-item-delete').on('click', function(event) {
-		console.log(event.target);
-	}); */
-	
-	
 });
 
 function init(rules) {
@@ -41,6 +36,9 @@ function init(rules) {
 	$('#rule-save').on('click', function(event) {
 		saveRule();
 	});
+	$('#rule-delete').on('click', function(event) {
+		deleteRule();
+	});
 }
 
 function newRule(rule, withSwitch) {
@@ -54,9 +52,6 @@ function newRule(rule, withSwitch) {
 	`);
 	$('#rule-new-item').prev().on('click', function(event) {
 		console.log('Rule item click, ' + event.target.text);
-		$('.rule-item').removeClass('active');
-		$(event.target).addClass('active');
-		
 		var ruleId = $(event.target).attr('rule-id');
 		switchToRule(ruleId);
 	});
@@ -97,7 +92,10 @@ function switchToRule(ruleId) {
 	var rule = rules[ruleId];
 	console.log(rule);
 	
-	$('#rule-name').text(rule.name);
+	$('.rule-item').removeClass('active');
+	$('a[rule-id="' + ruleId + '"]').addClass('active');
+	
+	$('#rule-name h5').text(rule.name);
 	$('#rule-name').attr('rule-id', ruleId);
 	
 	rule = rules[ruleId];
@@ -112,11 +110,11 @@ function switchToRule(ruleId) {
 function saveRule() {
 	var ruleId = $('#rule-name').attr('rule-id');
 	if (ruleId < 0) {
-		Materialize.toast('Can\'t save rule, rule id is ' + ruleId, 2000)
+		Materialize.toast('Add rule first.', 2000)
 		return;
 	}
 	
-	var ruleName = $('#rule-name').text();
+	var ruleName = $('#rule-name h5').text();
 	if (!ruleName) {
 		Materialize.toast('Rule name is empty.');
 		return;
@@ -132,6 +130,36 @@ function saveRule() {
 	rules[ruleId] = rule;
 	
 	saveRules();
+}
+
+function deleteRule() {
+	var ruleId = $('#rule-name').attr('rule-id');
+	if (ruleId < 0) {
+		Materialize.toast('Add rule first.', 2000)
+		return;
+	}
+	
+	console.log('Delete rule id: ' + ruleId);
+	rules.splice(ruleId, 1);
+	$('a[rule-id="' + ruleId + '"]').remove();
+	
+	if (ruleId >= rules.length) {
+		ruleId = rules.length - 1;
+	}
+	if (ruleId >= 0) {
+		switchToRule(ruleId);
+	} else {
+		clearForm();
+	}
+	
+	saveRules();
+}
+
+function clearForm() {
+	$('#rule-name h5').text('');
+	$('#rule-name').attr('rule-id', -1);
+	$('#rule-url').val('');
+	codeEditor.getDoc().setValue('');
 }
 
 function saveRules() {
