@@ -10,12 +10,9 @@ loadRules(function(rules) {
 
 function init(rule) {
 	document.addEventListener("mousedown", function(event){
-		//right click
-		if(event.button == 2) { 
-			console.log("mousedown event button 2");
-			clickedElement = event.target;
-			console.log(clickedElement);
-		}
+		console.log("mousedown event button " + event.button);
+		clickedElement = event.target;
+		console.log(clickedElement);
 	}, true);
 
 	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
