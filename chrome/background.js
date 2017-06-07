@@ -12,9 +12,13 @@ chrome.downloads.onDeterminingFilename.addListener(function (item, suggest) {
 			console.log(tab);
 			chrome.tabs.sendMessage(tab.id, "get_filename_by_clicked_element", function(value) {
 				console.log('Got filename by element: ' + value.filename);
-				filename = value.filename.replace(/[~<>:"/\\|?*\0]/g, '_') + ' ' + item.filename;
-				console.log('Final filename: ' + filename);
-				suggest({ filename: filename });
+				if (value.filename) {
+					filename = value.filename.replace(/[~<>:"/\\|?*\0]/g, '_') + ' ' + item.filename;
+					console.log('Final filename: ' + filename);
+					suggest({ filename: filename });
+				} else {
+					suggest({ filename: item.filename });
+				}
 			});
 		});
 	});

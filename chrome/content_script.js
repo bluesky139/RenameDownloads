@@ -20,7 +20,12 @@ function init(rule) {
 			console.log("Requesting get_filename_by_clicked_element");
 			console.log(rule.code);
 			
-			var filename = eval(rule.code);
+			var filename = null;
+			try {
+				filename = eval(rule.code);
+			} catch (err) {
+				console.log('Can\'t get filename, ' + err);
+			}
 			console.log(filename);
 			sendResponse({ filename: filename });
 		}
