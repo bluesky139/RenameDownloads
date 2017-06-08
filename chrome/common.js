@@ -2,6 +2,7 @@ function loadRules(callback) {
 	chrome.storage.local.get({
         rules: []
     }, function(items) {
+		console.log('Rules: ↓');
 		console.log(items);
         callback(items['rules']);
     });

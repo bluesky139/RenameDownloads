@@ -26,7 +26,7 @@ function init(rule) {
 			} catch (err) {
 				console.log('Can\'t get filename, ' + err);
 			}
-			console.log(filename);
+			console.log('Filename: ' + filename);
 			sendResponse({ filename: filename });
 		}
 	});
