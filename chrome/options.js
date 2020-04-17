@@ -2,6 +2,7 @@ var codeEditor;
 var rules = [];
 
 $(document).ready(function() {
+	$('.tooltipped').tooltip();
 	loadRules(function(rules) {
 		init(rules);
 	});
@@ -22,11 +23,17 @@ function init(rules) {
 	$('#rule-new').on('click', function(event) {
 		var ruleName = $('#rule-new-name').val();
 		if (!ruleName) {
-			Materialize.toast("Input rule name first.", 2000);
+			M.toast({
+				html: 'Input rule name first.',
+				displayLength: 2000
+			});
 			return;
 		}
 		if (isRuleNameDuplicated(ruleName)) {
-			Materialize.toast("Rule name is duplicated.", 2000);
+			M.toast({
+				html: 'Rule name is duplicated.',
+				displayLength: 2000
+			});
 			return;
 		}
 		var rule = createRule(ruleName, '', new Array());
@@ -73,7 +80,7 @@ function isRuleNameDuplicated(ruleName) {
 	return false;
 }
 
-function createRule(ruleName, code, urls) {
+function createRule(ruleName, code, urls, appendOriginalFilename) {
 	if (!ruleName) {
 		throw 'Rule name is empty.'
 	}
@@ -83,7 +90,8 @@ function createRule(ruleName, code, urls) {
 	return {
 		name: ruleName,
 		code: code,
-		urls: urls
+		urls: urls,
+		appendOriginalFilename: appendOriginalFilename
 	};
 }
 
@@ -105,18 +113,25 @@ function switchToRule(ruleId) {
 		$('#rule-url').val('');
 	}
 	codeEditor.getDoc().setValue(rule.code);
+	$('#append-original-filename').prop('checked', rule.appendOriginalFilename);
 }
 
 function saveRule() {
 	var ruleId = $('#rule-name').attr('rule-id');
 	if (ruleId < 0) {
-		Materialize.toast('Add rule first.', 2000)
+		M.toast({
+			html: 'Add rule first.',
+			displayLength: 2000
+		});
 		return;
 	}
 	
 	var ruleName = $('#rule-name h5').text();
 	if (!ruleName) {
-		Materialize.toast('Rule name is empty.');
+		M.toast({
+			html: 'Rule name is empty.',
+			displayLength: 2000
+		});
 		return;
 	}
 	
@@ -126,7 +141,8 @@ function saveRule() {
 	if ($('#rule-url').val()) {
 		urls.push($('#rule-url').val());
 	}
-	var rule = createRule(ruleName, code, urls);
+	var appendOriginalFilename = $('#append-original-filename').prop('checked');
+	var rule = createRule(ruleName, code, urls, appendOriginalFilename);
 	rules[ruleId] = rule;
 	
 	saveRules();
@@ -135,7 +151,10 @@ function saveRule() {
 function deleteRule() {
 	var ruleId = $('#rule-name').attr('rule-id');
 	if (ruleId < 0) {
-		Materialize.toast('Add rule first.', 2000)
+		M.toast({
+			html: 'Add rule first.',
+			displayLength: 2000
+		});
 		return;
 	}
 	
@@ -166,6 +185,9 @@ function saveRules() {
 	chrome.storage.local.set({ 
 		rules: rules
 	}, function() {
-		Materialize.toast('Saved.', 2000);
+		M.toast({
+			html: 'Saved.',
+			displayLength: 2000
+		});
 	});
 }

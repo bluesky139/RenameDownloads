@@ -31,10 +31,26 @@ function determiningFilename(item, suggest, referrer) {
 			var tab = tabs[0];
 			console.log('Current tab: ↓');
 			console.log(tab);
-			chrome.tabs.sendMessage(tab.id, "get_filename_by_clicked_element", function(value) {
+			var originalFilename = item.filename;
+			var i = originalFilename.lastIndexOf('.');
+			if (i >= 0) {
+				originalFilename = originalFilename.substring(0, i);
+			}
+			chrome.tabs.sendMessage(tab.id, {
+					action: "get_filename_by_clicked_element",
+					originalFilename: originalFilename
+				}, function(value) {
 				console.log('Got filename by element: ' + value.filename);
 				if (value.filename) {
-					filename = value.filename.replace(/[~<>:"/\\|?*\0]/g, '_') + ' ' + item.filename;
+					filename = value.filename.replace(/[~<>:"/\\|?*\0]/g, '_');
+					if (rule.appendOriginalFilename) {
+						filename += ' ' + item.filename;
+					} else {
+						var i = item.filename.lastIndexOf('.');
+						if (i >= 0) {
+							filename += item.filename.substring(i);
+						}
+					}
 					console.log('Final filename: ' + filename);
 					suggest({ filename: filename });
 				} else {

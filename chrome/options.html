@@ -104,6 +104,7 @@
 						<br>
 						Available variables:<br>
 						&nbsp;- clickedElement: The DOM element you just clicked.<br>
+						&nbsp;- originalFilename: Original download filename (without extension).<br>
 						<br>
 						Available libraries:<br>
 						&nbsp;- jQuery (v3.2.1)<br>
@@ -117,6 +118,11 @@
 			  </h5>
 			  <textarea id="rule-code">
 			  </textarea>
+			  <br />
+			  <label>
+				<input type="checkbox" class="filled-in" checked="checked" id="append-original-filename" />
+				<span>Append original filename</span>
+			  </label>
 			</div>
 		  </div>
 		</div>

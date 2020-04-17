@@ -2,10 +2,15 @@ function loadRules(callback) {
 	chrome.storage.local.get({
         rules: []
     }, function(items) {
+		items['rules'].forEach(function(rule) {
+			if (!('appendOriginalFilename' in rule)) {
+				rule.appendOriginalFilename = true;
+			}
+		});
 		console.log('Rules: ↓');
 		console.log(items);
         callback(items['rules']);
-    });
+	});
 }
 
 function getRuleByUrl(url, rules) {

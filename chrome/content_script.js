@@ -1,4 +1,5 @@
 var clickedElement;
+var originalFilename;
 
 loadRules(function(rules) {
 	var rule = getRuleByUrl(window.location.href, rules);
@@ -16,8 +17,9 @@ function init(rule) {
 	}, true);
 
 	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-		if(request == "get_filename_by_clicked_element") {
-			console.log("Requesting get_filename_by_clicked_element");
+		if(request.action == "get_filename_by_clicked_element") {
+			originalFilename = request.originalFilename;
+			console.log("Requesting get_filename_by_clicked_element, original filename " + originalFilename);
 			console.log(rule.code);
 			
 			var filename = null;
