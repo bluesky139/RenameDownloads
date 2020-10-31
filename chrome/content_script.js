@@ -29,7 +29,7 @@ function init(rule) {
 				console.log('Can\'t get filename, ' + err);
 			}
 			console.log('Filename: ' + filename);
-			sendResponse({ filename: filename });
+			sendResponse({ filename: filename, referrer: location.href });
 		}
 	});
 	console.log("Rename Downloads is loaded.");

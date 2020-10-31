@@ -21,12 +21,6 @@ function determiningFilename(item, suggest, referrer) {
 	}
 	
 	loadRules(function(rules) {
-		var rule = getRuleByUrl(referrer, rules);
-		if (!rule) {
-			suggest({ filename: item.filename })
-			return;
-		}
-		
 		chrome.tabs.query({ currentWindow:true, active: true }, function(tabs) {
 			var tab = tabs[0];
 			console.log('Current tab: ↓');
@@ -40,8 +34,13 @@ function determiningFilename(item, suggest, referrer) {
 					action: "get_filename_by_clicked_element",
 					originalFilename: originalFilename
 				}, function(value) {
-				console.log('Got filename by element: ' + value.filename);
+				console.log('Got filename by element: ' + value.filename + ", referrer: " + value.referrer);
 				if (value.filename) {
+					var rule = getRuleByUrl(value.referrer, rules);
+					if (!rule) {
+						suggest({ filename: item.filename })
+						return;
+					}
 					filename = value.filename.replace(/[~<>:"/\\|?*\0]/g, '_');
 					if (rule.appendOriginalFilename) {
 						filename += ' ' + item.filename;
